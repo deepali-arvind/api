@@ -42,18 +42,15 @@ script:
   - npm i  ../d3.amexio.github.io/amexio-chart-d3.tgz
   - ng set defaults.styleExt scss
   - ng build --prod 
+  - git clone https://github.com/deepali-arvind/api/
+  - rm -rf api/api/v5.3/*
+  - cp -rf dist/ api/api/v5.3/*
+  - cd api
+  - git add .
+  - git commit -m "date"
+  - git push
+  
   
 after_success: 
   - codecov
 
-deploy:
-  provider: pages
-  github_token: 5a2e08c1fc58d7991651f9c64918bcb11e50b089
-  file_glob: true
-  file: dist/*
-  skip_cleanup: true
-  on:
-    repo: deepali-arvind/api
-    all_branches: true
-cache:
-  yarn: true
